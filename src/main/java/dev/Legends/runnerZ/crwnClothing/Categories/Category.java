@@ -1,8 +1,9 @@
-package dev.Legends.runnerZ.crwnClothing;
+package dev.Legends.runnerZ.crwnClothing.Categories;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public record Category(
+
         Integer id,
         String title,
         //@JsonProperty("imageUrl")

@@ -1,4 +1,4 @@
-package dev.Legends.runnerZ.crwnClothing;
+package dev.Legends.runnerZ.crwnClothing.Categories;
 
 import java.util.List;
 

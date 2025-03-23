@@ -1,9 +1,6 @@
-package dev.Legends.runnerZ.crwnClothing;
+package dev.Legends.runnerZ.crwnClothing.Categories;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dev.Legends.runnerZ.Run.JdbcClientRunRepository;
-import dev.Legends.runnerZ.Run.RunJsonDataLoader;
-import dev.Legends.runnerZ.Run.Runs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.asm.TypeReference;
@@ -12,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 @Component
 public class CategoryJsonDataLoader implements CommandLineRunner {
@@ -28,7 +24,7 @@ public class CategoryJsonDataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if(categoryRepository.count()==0){
+        if(categoryRepository.count()==0 ){
             try(InputStream inputStream = TypeReference.class.getResourceAsStream("/data/Categories.json")){
                 if (inputStream == null) {
                     throw new RuntimeException("File not found: /data/Categories.json");
