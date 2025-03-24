@@ -14,4 +14,9 @@ public class ApiResponse<T> {
     public int getStatus() { return status; }
     public T getData() { return data; }
     public String getMessage() { return message; }
+
+    @Override
+    public String toString() {
+        return "data:"+getData();
+    }
 }

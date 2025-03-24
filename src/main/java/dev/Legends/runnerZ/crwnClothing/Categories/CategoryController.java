@@ -21,7 +21,7 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
 
-    @PostMapping("/createCategory")
+    @PostMapping("/create/category")
     ResponseEntity<ApiResponse<Category>> createCategory(@RequestBody Category category){
 
         Category savedCategory = categoryRepository.create(category);
