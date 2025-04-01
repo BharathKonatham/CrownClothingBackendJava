@@ -51,10 +51,10 @@ public class Application implements WebMvcConfigurer {
 //	@Bean
 //	CommandLineRunner runner(UserHttpClient client){
 //		return args->{
-//			List<User> users= client.findAll();
+//			List<UserEntity> users= client.findAll();
 //			System.out.println(users);
 //
-//			User user = client.findById(1);
+//			UserEntity user = client.findById(1);
 //			System.out.println(user);
 //		};
 //	}
