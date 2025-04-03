@@ -4,6 +4,7 @@ package dev.Legends.runnerZ.crwnClothing.Product;
 import dev.Legends.runnerZ.crwnClothing.utils.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class ProductController {
         }
 
     }
-
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/getallproducts")
     public ResponseEntity<ApiResponse<List<ProductDTO>>> getAllProducts(){
         try{
