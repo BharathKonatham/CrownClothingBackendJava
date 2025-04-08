@@ -1,4 +1,4 @@
-package dev.Legends.runnerZ.crwnClothing.security;
+package dev.Legends.runnerZ.crwnClothing.security.register;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

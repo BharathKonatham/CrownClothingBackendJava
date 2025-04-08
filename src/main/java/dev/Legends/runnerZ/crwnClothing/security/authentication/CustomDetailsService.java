@@ -1,7 +1,9 @@
-package dev.Legends.runnerZ.crwnClothing.security;
+package dev.Legends.runnerZ.crwnClothing.security.authentication;
 
+import dev.Legends.runnerZ.crwnClothing.security.register.RoleEntity;
+import dev.Legends.runnerZ.crwnClothing.security.register.UserEntity;
+import dev.Legends.runnerZ.crwnClothing.security.register.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,10 +13,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomerDetailsService implements UserDetailsService {
+public class CustomDetailsService implements UserDetailsService {
     public final UserRepository userRepository;
     //public final  UserDetails userDetails;
-    public CustomerDetailsService(UserRepository userRepository){
+    public CustomDetailsService(UserRepository userRepository){
         this.userRepository = userRepository;
 
     }
@@ -29,6 +31,9 @@ public class CustomerDetailsService implements UserDetailsService {
         Set<SimpleGrantedAuthority> authorities = userRoles.stream()
                 .map(role -> new SimpleGrantedAuthority(role))
                 .collect(Collectors.toSet());
+
+        System.out.println("Roles: " + userRoles);
+        System.out.println("Authorities: " + authorities);
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPassword(),

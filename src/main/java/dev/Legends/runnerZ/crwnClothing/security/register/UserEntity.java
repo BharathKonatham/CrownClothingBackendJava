@@ -1,10 +1,11 @@
-package dev.Legends.runnerZ.crwnClothing.security;
+package dev.Legends.runnerZ.crwnClothing.security.register;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,6 +31,10 @@ public class UserEntity {
     @Column(nullable = false)
     private  String password;
 
+    @Column(name = "created_ts", updatable = false)
+    @CreationTimestamp  // Automatically sets the timestamp when the entity is persisted
+    private LocalDateTime createdAt;
+
     @JsonManagedReference
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -37,6 +42,7 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_name")
     )
+
     private Set<RoleEntity> roles = new HashSet<>();
 
     public void setRoles(Set<RoleEntity> roleEntities) {
@@ -74,6 +80,20 @@ public class UserEntity {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getcreatedAt() {
+        return createdAt;
+    }
+
+
 
     public Set<RoleEntity> getRoles() {
         return roles;

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/create")
 public class CategoryController {
 
     public final JdbcCategoryRepository categoryRepository;
@@ -16,12 +16,19 @@ public class CategoryController {
     CategoryController(JdbcCategoryRepository categoryRepository){
         this.categoryRepository = categoryRepository;
     }
-    @GetMapping("/categories")
-    List<Category> findAll(){
-        return categoryRepository.findAll();
-    }
+    @GetMapping("/get-all-categories")
 
-    @PostMapping("/create/category")
+    ResponseEntity<ApiResponse<List<Category>>> getAllCategories(){
+        List<Category> categories = categoryRepository.findAll();
+        ApiResponse<List<Category>> response = new ApiResponse<>(categories,
+                HttpStatus.OK.value(),"Categories Retrieved Successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+//    List<Category> findAll(){
+//        return categoryRepository.findAll();
+//    }
+
+    @PostMapping("/category")
     ResponseEntity<ApiResponse<Category>> createCategory(@RequestBody Category category){
 
         Category savedCategory = categoryRepository.create(category);
