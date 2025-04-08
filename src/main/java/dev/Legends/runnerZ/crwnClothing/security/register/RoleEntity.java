@@ -1,11 +1,9 @@
-package dev.Legends.runnerZ.crwnClothing.security;
+package dev.Legends.runnerZ.crwnClothing.security.register;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Objects;

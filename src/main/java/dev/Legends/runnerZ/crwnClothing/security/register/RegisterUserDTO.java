@@ -1,9 +1,6 @@
-package dev.Legends.runnerZ.crwnClothing.security;
+package dev.Legends.runnerZ.crwnClothing.security.register;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dev.Legends.runnerZ.crwnClothing.RoleEnum;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

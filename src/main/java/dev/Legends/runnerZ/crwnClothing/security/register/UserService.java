@@ -1,6 +1,5 @@
-package dev.Legends.runnerZ.crwnClothing.security;
+package dev.Legends.runnerZ.crwnClothing.security.register;
 
-import dev.Legends.runnerZ.crwnClothing.Categories.JdbcCategoryRepository;
 import dev.Legends.runnerZ.crwnClothing.utils.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
 

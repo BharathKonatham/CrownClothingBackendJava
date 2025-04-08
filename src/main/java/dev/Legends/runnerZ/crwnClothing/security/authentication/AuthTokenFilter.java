@@ -1,4 +1,4 @@
-package dev.Legends.runnerZ.crwnClothing.security;
+package dev.Legends.runnerZ.crwnClothing.security.authentication;
 
 
 import jakarta.servlet.FilterChain;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -24,9 +23,11 @@ public class AuthTokenFilter extends OncePerRequestFilter { // OncePerRequestFil
     private JwtUtils jwtUtils;
 
     @Autowired
-    private CustomerDetailsService customerDetailsService;
+    private CustomDetailsService userDetailsService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
+
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -35,9 +36,9 @@ public class AuthTokenFilter extends OncePerRequestFilter { // OncePerRequestFil
         try {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-                String username = jwtUtils.getUserNameFromJwtToken(jwt);
+                String userEmail = jwtUtils.getUserEmailFromJwtToken(jwt);
 
-                UserDetails userDetails = customerDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails,
@@ -55,6 +56,13 @@ public class AuthTokenFilter extends OncePerRequestFilter { // OncePerRequestFil
 
         filterChain.doFilter(request, response);
     }
+
+    /**
+     * This method extracts the JWT from the request header.
+     *
+     * @param request The HTTP request containing the JWT in the Authorization header.
+     * @return The extracted JWT as a String, or null if no valid JWT is found.
+     */
 
     private String parseJwt(HttpServletRequest request) {
         String jwt = jwtUtils.getJwtFromHeader(request);

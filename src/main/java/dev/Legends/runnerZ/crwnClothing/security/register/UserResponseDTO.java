@@ -1,6 +1,4 @@
-package dev.Legends.runnerZ.crwnClothing.security;
-
-import lombok.Data;
+package dev.Legends.runnerZ.crwnClothing.security.register;
 
 import java.util.Set;
 
