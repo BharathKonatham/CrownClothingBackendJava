@@ -32,7 +32,7 @@ public class UserService {
 
 
         // Check if user already exists
-        if (userRepository.findByEmail(registerUserDTO.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(registerUserDTO.getEmail().toLowerCase()).isPresent()) {
             throw new RuntimeException("User already exists!");
         }
         System.out.println(roleRepository.findAll());
@@ -46,7 +46,7 @@ public class UserService {
         UserEntity userEntity = new UserEntity();
         userEntity.setFirstName(registerUserDTO.getFirstName());
         userEntity.setLastName(registerUserDTO.getLastName());
-        userEntity.setEmail(registerUserDTO.getEmail());
+        userEntity.setEmail(registerUserDTO.getEmail().toLowerCase());
         userEntity.setPassword(passwordEncoder.encode(registerUserDTO.getPassword())); // Encrypt password
         userEntity.setRoles(userRoles); // Assign Role
         UserEntity createdUser = userRepository.save(userEntity);// Save user
