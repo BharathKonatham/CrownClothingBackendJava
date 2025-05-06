@@ -3,6 +3,7 @@ package dev.Legends.runnerZ.crwnClothing.Categories;
 import dev.Legends.runnerZ.crwnClothing.utils.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,29 +12,30 @@ import java.util.List;
 @RequestMapping("/create")
 public class CategoryController {
 
-    public final JdbcCategoryRepository categoryRepository;
-
-    CategoryController(JdbcCategoryRepository categoryRepository){
-        this.categoryRepository = categoryRepository;
+    //public final JdbcCategoryRepository categoryRepository;
+    public  final CategoryService categoryService;
+    CategoryController(CategoryService categoryService){
+        //this.categoryRepository = categoryRepository;
+        this.categoryService = categoryService;
     }
-    @GetMapping("/get-all-categories")
-
-    ResponseEntity<ApiResponse<List<Category>>> getAllCategories(){
-        List<Category> categories = categoryRepository.findAll();
-        ApiResponse<List<Category>> response = new ApiResponse<>(categories,
-                HttpStatus.OK.value(),"Categories Retrieved Successfully");
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
+//    @GetMapping("/get-all-categories")
+//    ResponseEntity<ApiResponse<List<CategoryDTO>>> getAllCategories(){
+//        List<CategoryDTO> categories = categoryRepository.findAll();
+//        ApiResponse<List<CategoryDTO>> response = new ApiResponse<>(categories,
+//                HttpStatus.OK.value(),"Categories Retrieved Successfully");
+//        return ResponseEntity.status(HttpStatus.OK).body(response);
+//    }
 //    List<Category> findAll(){
 //        return categoryRepository.findAll();
 //    }
 
+    @PreAuthorize(value = "hasRole('ADMIN')")
     @PostMapping("/category")
-    ResponseEntity<ApiResponse<Category>> createCategory(@RequestBody Category category){
+    ResponseEntity<ApiResponse<CategoryDTO>> createCategory(@RequestBody CategoryDTO category){
 
-        Category savedCategory = categoryRepository.create(category);
+        CategoryDTO savedCategory = categoryService.createCategory(category);
 
-        ApiResponse<Category> response = new ApiResponse<>(savedCategory,
+        ApiResponse<CategoryDTO> response = new ApiResponse<>(savedCategory,
                 HttpStatus.CREATED.value(),"Category Created Successfully");
         return  ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
